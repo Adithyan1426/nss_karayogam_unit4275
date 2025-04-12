@@ -1,105 +1,182 @@
-import React from "react";
-import { Link } from "react-router-dom";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NSS Karayogam</title>
+  <style>
+    /* Reset default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-export default function NSSKarayogam() {
-  return (
-    <div className="font-sans bg-white text-gray-800">
-      {/* Hero Section */}
-      <section className="h-screen bg-gradient-to-br from-yellow-200 to-yellow-500 flex items-center justify-center text-center px-4">
-        <div>
-          <h1 className="text-5xl font-bold text-white drop-shadow-lg">NSS Karayogam</h1>
-          <p className="mt-4 text-xl text-white max-w-xl mx-auto">
-            A community rooted in service, culture, and progress.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <Link to="/library">
-              <button className="px-6 py-2 bg-white text-yellow-600 font-semibold rounded-full shadow-lg hover:bg-yellow-100 transition">
-                Visit Library
-              </button>
-            </Link>
-            <Link to="/history">
-              <button className="px-6 py-2 bg-white text-yellow-600 font-semibold rounded-full shadow-lg hover:bg-yellow-100 transition">
-                History
-              </button>
-            </Link>
-            <Link to="/flash">
-              <button className="px-6 py-2 bg-white text-yellow-600 font-semibold rounded-full shadow-lg hover:bg-yellow-100 transition">
-                Flash Noteslider
-              </button>
-            </Link>
-            <Link to="/about">
-              <button className="px-6 py-2 bg-white text-yellow-600 font-semibold rounded-full shadow-lg hover:bg-yellow-100 transition">
-                About
-              </button>
-            </Link>
-            <Link to="/lucky-draw">
-              <button className="px-6 py-2 bg-white text-yellow-600 font-semibold rounded-full shadow-lg hover:bg-yellow-100 transition">
-                Lucky Draw Winners
-              </button>
-            </Link>
-          </div>
-        </div>
-      </section>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
 
-      {/* About Section */}
-      <section className="py-16 px-6 md:px-20 bg-white">
-        <h2 className="text-3xl font-bold text-center mb-6">About NSS Karayogam</h2>
-        <p className="max-w-3xl mx-auto text-center text-gray-600">
-          NSS Karayogam is a community-based organization dedicated to preserving traditions, supporting education, and empowering individuals through cultural and social initiatives.
-        </p>
-      </section>
+    header {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+    }
 
-      {/* Activities Section */}
-      <section className="py-16 px-6 md:px-20 bg-yellow-50">
-        <h2 className="text-3xl font-bold text-center mb-12">Our Activities</h2>
-        <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold mb-2">Cultural Programs</h3>
-            <p className="text-gray-600">Organizing and preserving our traditional art and culture.</p>
-          </div>
-          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold mb-2">Educational Support</h3>
-            <p className="text-gray-600">Offering scholarships, books, and mentoring for students.</p>
-          </div>
-          <div className="p-6 bg-white rounded-xl shadow hover:shadow-lg transition">
-            <h3 className="text-xl font-semibold mb-2">Community Welfare</h3>
-            <p className="text-gray-600">Medical camps, awareness drives, and support for the needy.</p>
-          </div>
-        </div>
-      </section>
+    header .logo img {
+      height: 50px;
+    }
 
-      {/* Photo Gallery Section */}
-      <section className="py-16 px-6 md:px-20 bg-white">
-        <h2 className="text-3xl font-bold text-center mb-12">Photo Gallery</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {[1, 2, 3, 4, 5, 6].map((item) => (
-            <div key={item} className="rounded-lg overflow-hidden shadow-md">
-              <img
-                src={`https://via.placeholder.com/300?text=Photo+${item}`}
-                alt={`NSS Karayogam Event ${item}`}
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-4 text-center text-gray-700">Event {item}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
 
-      {/* Contact Section */}
-      <section className="py-16 px-6 md:px-20 bg-white">
-        <h2 className="text-3xl font-bold text-center mb-6">Contact Us</h2>
-        <form className="max-w-xl mx-auto grid gap-4">
-          <input className="p-3 border border-gray-300 rounded" type="text" placeholder="Your Name" required />
-          <input className="p-3 border border-gray-300 rounded" type="email" placeholder="Your Email" required />
-          <textarea className="p-3 border border-gray-300 rounded" rows="4" placeholder="Your Message"></textarea>
-          <button className="mt-2 px-6 py-3 bg-yellow-600 text-white font-bold rounded hover:bg-yellow-700 transition">Send Message</button>
-        </form>
-      </section>
+    nav ul li {
+      margin-left: 20px;
+    }
 
-      {/* Footer */}
-      <footer className="bg-yellow-600 text-white text-center py-6">
-        <p>© 2025 NSS Karayogam. All rights reserved.</p>
-      </footer>
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hero section */
+    .hero {
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    /* Content Section */
+    .content {
+      padding: 40px 20px;
+      background-color: #fff;
+    }
+
+    .content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      nav ul {
+        flex-direction: column;
+        margin-top: 15px;
+      }
+
+      nav ul li {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="NSS Logo"> <!-- Replace with your logo -->
     </div>
-  );
-}
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Welcome to NSS Karayogam</h1>
+    <p>Empowering communities through service and development.</p>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="content">
+    <h2>About Us</h2>
+    <p>The NSS Karayogam is dedicated to empowering individuals and communities through social service initiatives, with a vision to create a better future for all.</p>
+    <p>Our mission is to provide a platform for volunteers to contribute towards the upliftment of society by organizing community-driven programs and events.</p>
+  </section>
+
+  <!-- Events Section -->
+  <section id="events" class="content">
+    <h2>Upcoming Events</h2>
+    <p>Join us for our upcoming events aimed at spreading awareness and driving positive change in the community.</p>
+    <ul>
+      <li>Blood Donation Camp - April 2025</li>
+      <li>Clean-Up Drive - May 2025</li>
+      <li>Tree Plantation Campaign - June 2025</li>
+    </ul>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="content">
+    <h2>Contact Us</h2>
+    <p>If you have any questions or want to get involved, feel free to reach out!</p>
+    <p>Email: <a href="mailto:nss@example.com">nss@example.com</a></p>
+    <p>Phone: +91 123 456 7890</p>
+  </section>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>&copy; 2025 NSS Karayogam | All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Optional: Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
