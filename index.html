@@ -94,6 +94,56 @@
       width: 100%;
     }
 
+    /* Library Section */
+    .library-container {
+      padding: 40px 20px;
+      background-color: #f4f4f4;
+    }
+
+    .search-container {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .search-input {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 500px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      border-color: #007bff;
+    }
+
+    .books-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .book-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .book-card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .book-card p {
+      font-size: 16px;
+      color: #666;
+    }
+
     /* Responsive Design */
     @media (max-width: 768px) {
       header {
@@ -109,91 +159,11 @@
       nav ul li {
         margin-bottom: 10px;
       }
+
+      .search-input {
+        width: 100%;
+      }
     }
-    /* App.css */
-
-/* Basic Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-.App-header {
-  background-color: #333;
-  color: white;
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.search-container {
-  margin-bottom: 30px;
-}
-
-.search-input {
-  padding: 10px;
-  font-size: 16px;
-  width: 80%;
-  max-width: 500px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s;
-}
-
-.search-input:focus {
-  border-color: #007bff;
-}
-
-.books-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-}
-
-.book-card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-.book-card h2 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.book-card p {
-  font-size: 16px;
-  color: #666;
-}
-
-@media (max-width: 600px) {
-  .search-input {
-    width: 100%;
-  }
-}
 
   </style>
 </head>
@@ -238,6 +208,17 @@ body {
     </ul>
   </section>
 
+  <!-- Library Section -->
+  <section id="library" class="library-container">
+    <h2>Library</h2>
+    <div class="search-container">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search books or authors..." oninput="filterBooks()">
+    </div>
+    <div class="books-container" id="booksContainer">
+      <!-- Book cards will be dynamically added here -->
+    </div>
+  </section>
+
   <!-- Contact Section -->
   <section id="contact" class="content">
     <h2>Contact Us</h2>
@@ -252,16 +233,53 @@ body {
   </footer>
 
   <script>
-    // Optional: Add smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-          behavior: 'smooth'
-        });
+    // Book data
+    const books = [
+      { title: "Aadujeevitham", author: "Benyamin" },
+      { title: "Randamoozham", author: "M.T. Vasudevan Nair" },
+      { title: "The Alchemist", author: "Paulo Coelho" },
+      { title: "Wings of Fire", author: "A.P.J. Abdul Kalam" },
+      { title: "Sapiens", author: "Yuval Noah Harari" },
+      { title: "1984", author: "George Orwell" },
+      { title: "The Power of Habit", author: "Charles Duhigg" },
+      { title: "Atomic Habits", author: "James Clear" }
+    ];
+
+    // Function to display books
+    function displayBooks(filteredBooks) {
+      const booksContainer = document.getElementById('booksContainer');
+      booksContainer.innerHTML = '';
+
+      filteredBooks.forEach(book => {
+        const bookCard = document.createElement('div');
+        bookCard.classList.add('book-card');
+        
+        const bookTitle = document.createElement('h2');
+        bookTitle.textContent = book.title;
+
+        const bookAuthor = document.createElement('p');
+        bookAuthor.textContent = `by ${book.author}`;
+
+        bookCard.appendChild(bookTitle);
+        bookCard.appendChild(bookAuthor);
+        booksContainer.appendChild(bookCard);
       });
-    });
+    }
+
+    // Function to filter books based on search input
+    function filterBooks() {
+      const searchInput = document.getElementById('searchInput').value.toLowerCase();
+      const filteredBooks = books.filter(book => 
+        book.title.toLowerCase().includes(searchInput) || 
+        book.author.toLowerCase().includes(searchInput)
+      );
+      displayBooks(filteredBooks);
+    }
+
+    // Display all books initially
+    displayBooks(books);
   </script>
 
 </body>
 </html>
+
