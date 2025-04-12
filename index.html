@@ -2,94 +2,277 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NSS Karayogam</title>
-  <link rel="stylesheet" href="styles.css" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
-    nav { background: #003366; padding: 1em; text-align: center; position: sticky; top: 0; z-index: 999; }
-    nav a { color: white; margin: 0 1em; text-decoration: none; font-weight: bold; }
-    header { background: #006699; color: white; padding: 2em; text-align: center; }
-    section { padding: 2em; max-width: 1200px; margin: auto; }
-    .button { background: #004080; color: white; padding: 0.5em 1em; border: none; text-decoration: none; border-radius: 5px; margin-top: 1em; display: inline-block; }
-    .button:hover { background: #00264d; }
-    footer { background: #003366; color: white; text-align: center; padding: 1em; }
-    .card { background: #f4f4f4; padding: 1em; margin-bottom: 1em; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1); }
-    .member-photos, .section-photos { display: flex; overflow-x: auto; gap: 1em; padding: 1em 0; }
-    .member-photos img, .section-photos img { flex: 0 0 auto; width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #ccc; }
-    .notification-box { background: #e0f7fa; color: #006064; padding: 1em; border-left: 5px solid #006064; margin-bottom: 2em; border-radius: 5px; }
-    @media (max-width: 600px) {
-      header h1 { font-size: 1.5em; }
-      header p, section p { font-size: 1em; }
-      nav a { display: block; margin: 0.5em 0; }
-      .member-photos img, .section-photos img { width: 80px; height: 80px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background-color: #333;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    header .logo img {
+      height: 50px;
+    }
+
+    nav {
+      display: flex;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hamburger Icon */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .bar {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    /* Mobile Menu */
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #444;
+      padding-top: 80px;
+      transition: right 0.3s ease;
+      z-index: 999;
+    }
+
+    .mobile-nav ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    .mobile-nav ul li {
+      margin: 20px 0;
+    }
+
+    .mobile-nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    .mobile-nav.active {
+      right: 0;
+    }
+
+    /* Hero Section */
+    .hero {
+      margin-top: 80px;
+      text-align: center;
+      padding: 40px 20px;
+      background-color: #f4f4f4;
+    }
+
+    .hero img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+
+    /* Scrolling Notice */
+    .notice {
+      width: 100%;
+      background: darkred;
+      color: white;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .notice-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    /* Content */
+    .content {
+      padding: 40px 20px;
+      background-color: #fff;
+    }
+
+    .content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .content p, .content ul {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .content ul {
+      padding-left: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
     }
   </style>
 </head>
 <body>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="library.html">Library</a>
-    <a href="community-members.html">Community Members</a>
-    <a href="mannathu-padmanabhan.html">Founder</a>
-    <a href="contact.html">Contact</a>
-  </nav>
 
+  <!-- Header -->
   <header>
-    <h1>Welcome to NSS Karayogam</h1>
-    <p>Empowering communities through service and unity</p>
+    <div class="logo">
+      <img src="logo.png" alt="NSS Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="library.html">Library</a></li>
+      </ul>
+    </nav>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
   </header>
 
-  <section>
-    <div class="notification-box">
-      <strong>Notice:</strong> Our annual general body meeting will be held on <strong>May 10, 2025</strong> at 4:00 PM in the Karayogam Hall. All members are requested to attend.
-    </div>
+  <!-- Mobile Slide Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <ul>
+      <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+      <li><a href="#about" onclick="toggleMenu()">About</a></li>
+      <li><a href="#events" onclick="toggleMenu()">Events</a></li>
+      <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+      <li><a href="library.html" onclick="toggleMenu()">Library</a></li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>About NSS</h2>
-      <p>The Nair Service Society (NSS) was established to uplift and unify the Nair community. We aim to serve society by promoting education, culture, and service through our various initiatives.</p>
-      <div class="section-photos">
-        <img src="images/about1.jpg" alt="About NSS 1">
-        <img src="images/about2.jpg" alt="About NSS 2">
-      </div>
-      <a href="about.html" class="button">More</a>
-    </div>
-
-    <div class="card">
-      <h2>Our Founder - Mannathu Padmanabhan</h2>
-      <p>Mannathu Padmanabhan was a visionary leader and social reformer who dedicated his life to the progress of the Nair community and the betterment of society as a whole.</p>
-      <div class="section-photos">
-        <img src="images/founder1.jpg" alt="Founder 1">
-        <img src="images/founder2.jpg" alt="Founder 2">
-      </div>
-      <a href="mannathu-padmanabhan.html" class="button">More</a>
-    </div>
-
-    <div class="card">
-      <h2>Community Members</h2>
-      <p>Meet the people who lead and manage our local Karayogam activities, ensuring community involvement and service.</p>
-      <div class="member-photos">
-        <img src="images/member1.jpg" alt="Member 1">
-        <img src="images/member2.jpg" alt="Member 2">
-        <img src="images/member3.jpg" alt="Member 3">
-        <img src="images/member4.jpg" alt="Member 4">
-      </div>
-      <a href="community-members.html" class="button">More</a>
-    </div>
-
-    <div class="card">
-      <h2>Library</h2>
-      <p>Our library is a hub of knowledge offering a wide range of books, magazines, and digital resources for all age groups.</p>
-      <div class="section-photos">
-        <img src="images/library1.jpg" alt="Library 1">
-        <img src="images/library2.jpg" alt="Library 2">
-      </div>
-      <a href="library.html" class="button">More</a>
-    </div>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <img src="temple.jpg" alt="Temple" />
+    <h1>Welcome to NSS Karayogam</h1>
+    <p>Empowering communities through service and development.</p>
   </section>
 
+  <!-- Notice -->
+  <div class="notice">
+    <span class="notice-text">📣📣 മാറനാട് പുലമൺകാവ് ക്ഷേത്രത്തിൽ നിന്നുള്ള അറിയിപ്പ്....... ക്ഷേത്ര ചുറ്റുമതിൽ പൂർത്തീകരിക്കുവാൻ ഉദാരമായി സംഭാവന നൽകണമെന്ന് അഭ്യർത്ഥിക്കുന്നു........</span>
+  </div>
+
+  <!-- About -->
+  <section id="about" class="content">
+    <h2>About Us</h2>
+    <p>The NSS Karayogam is dedicated to empowering individuals and communities through social service initiatives, with a vision to create a better future for all.</p>
+  </section>
+
+  <!-- Events -->
+  <section id="events" class="content">
+    <h2>Upcoming Events</h2>
+    <ul>
+      <li>Blood Donation Camp - April 2025</li>
+      <li>Clean-Up Drive - May 2025</li>
+      <li>Tree Plantation Campaign - June 2025</li>
+    </ul>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="content">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:nss@example.com">nss@example.com</a></p>
+    <p>Phone: +91 123 456 7890</p>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 NSS Karayogam. All Rights Reserved.</p>
+    <p>&copy; 2025 NSS Karayogam | All Rights Reserved</p>
   </footer>
+
+  <!-- JS for Mobile Nav -->
+  <script>
+    function toggleMenu() {
+      document.getElementById("mobileNav").classList.toggle("active");
+    }
+  </script>
 </body>
 </html>
