@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Service Organization</title>
+    <title>Community Library Organization</title>
     <style>
         * {
             margin: 0;
@@ -17,6 +17,7 @@
             color: #333;
         }
 
+        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -70,9 +71,10 @@
             cursor: pointer;
         }
 
+        /* Hero */
         .hero {
             height: 100vh;
-            background: url('hero-bg.jpg') center/cover no-repeat;
+            background: linear-gradient(to right, #004aad, #007bff);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -108,6 +110,7 @@
             background: #e6c200;
         }
 
+        /* Sections */
         .section {
             padding: 4rem 5%;
             text-align: center;
@@ -119,6 +122,57 @@
             color: #004aad;
         }
 
+        /* Library Section */
+        .library-section {
+            background-color: #f4f4f4;
+        }
+
+        .library-section input {
+            width: 60%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .library-table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .library-table th, .library-table td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .library-table th {
+            background-color: #007bff;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .library-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .library-table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .index-col {
+            background-color: #333;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* About Section */
         .about-content {
             display: flex;
             justify-content: center;
@@ -130,51 +184,7 @@
             max-width: 300px;
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            padding: 2rem;
-            background: #f9f9f9;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .service-card i {
-            font-size: 2.5rem;
-            color: #004aad;
-            margin-bottom: 1rem;
-        }
-
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .news-item {
-            text-align: left;
-            padding: 1rem;
-            background: #f9f9f9;
-            border-radius: 10px;
-        }
-
-        .news-item a {
-            color: #004aad;
-            text-decoration: none;
-        }
-
-        .news-item a:hover {
-            text-decoration: underline;
-        }
-
+        /* Contact Section */
         .contact form {
             max-width: 500px;
             margin: 0 auto;
@@ -209,6 +219,7 @@
             background: #003580;
         }
 
+        /* Footer */
         footer {
             background: #004aad;
             color: #fff;
@@ -296,6 +307,14 @@
             .section h2 {
                 font-size: 2rem;
             }
+
+            .library-section input {
+                width: 90%;
+            }
+
+            .library-table {
+                width: 95%;
+            }
         }
     </style>
 </head>
@@ -305,13 +324,12 @@
         <nav class="navbar">
             <div class="logo">
                 <img src="logo.png" alt="Logo" />
-                <span>Community Service Org</span>
+                <span>Community Library Org</span>
             </div>
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
+                <li><a href="#library">Library</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#news">News</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger">☰</div>
@@ -321,60 +339,41 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Welcome to Our Community</h1>
-            <p>Join us in building a brighter future through service and unity.</p>
-            <a href="#about" class="cta-button">Learn More</a>
+            <h1>Welcome to Our Library</h1>
+            <p>Discover knowledge and inspire growth through our community resources.</p>
+            <a href="#library" class="cta-button">Explore Library</a>
         </div>
+    </section>
+
+    <!-- Library Section -->
+    <section id="library" class="section library-section">
+        <h2>Library Catalog</h2>
+        <input type="text" id="searchInput" onkeyup="searchBook()" placeholder="Search by Title, Author, or Genre...">
+        <table id="libraryTable" class="library-table">
+            <thead>
+                <tr>
+                    <th class="index-col">#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody id="libraryTableBody"></tbody>
+        </table>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section">
         <h2>About Us</h2>
-        <p>Founded with a vision to uplift society, we focus on education, welfare, and community development. Our legacy spans decades, driven by selfless service.</p>
+        <p>We are a community-driven organization dedicated to education and cultural preservation, providing access to a vast library and learning programs.</p>
         <div class="about-content">
             <div class="about-item">
                 <h3>Our Mission</h3>
-                <p>Empower communities through sustainable initiatives.</p>
+                <p>Promote literacy and lifelong learning.</p>
             </div>
             <div class="about-item">
                 <h3>Our Vision</h3>
-                <p>A united society thriving on equality and opportunity.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="section services">
-        <h2>Our Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Education</h3>
-                <p>Running schools and skill development programs.</p>
-            </div>
-            <div class="service-card">
-                <h3>Welfare</h3>
-                <p>Support for healthcare and underprivileged groups.</p>
-            </div>
-            <div class="service-card">
-                <h3>Community Programs</h3>
-                <p>Events and initiatives for social cohesion.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- News Section -->
-    <section id="news" class="section">
-        <h2>Latest News</h2>
-        <div class="news-grid">
-            <div class="news-item">
-                <h3>Annual Meet 2025</h3>
-                <p>Join us on April 20 for our community gathering.</p>
-                <a href="#">Read More</a>
-            </div>
-            <div class="news-item">
-                <h3>New School Opening</h3>
-                <p>We’re launching a new campus in June!</p>
-                <a href="#">Read More</a>
+                <p>A society enriched by knowledge and unity.</p>
             </div>
         </div>
     </section>
@@ -395,15 +394,15 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Contact Info</h3>
-                <p>Email: info@org.com</p>
+                <p>Email: info@libraryorg.com</p>
                 <p>Phone: +123-456-7890</p>
             </div>
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="#home">Home</a></li>
+                    <li><a href="#library">Library</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -415,36 +414,70 @@
                 </div>
             </div>
         </div>
-        <p class="footer-bottom">© 2025 Community Service Org. All Rights Reserved.</p>
+        <p class="footer-bottom">© 2025 Community Library Org. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Toggle mobile menu
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
+        // Library Data (Corrected)
+        const library = [
+            { title: "Orru Vidyārththikkŭ", author: "Not specified", genre: "Not specified" },
+            { title: "Manassinte Bandhangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Jñānam", author: "Not specified", genre: "Not specified" },
+            { title: "For the Love of Physics", author: "Walter Lewin", genre: "Non-fiction" },
+            { title: "Janaral Medisin", author: "Not specified", genre: "Not specified" },
+            { title: "The Grand Design", author: "Stephen Hawking", genre: "Non-fiction" },
+            { title: "Adhyāpakante Katha", author: "Not specified", genre: "Not specified" },
+            { title: "Guruvinte Grantham", author: "Not specified", genre: "Not specified" },
+            { title: "Bālapathanam", author: "Not specified", genre: "Not specified" },
+            { title: "Bhāshācharya", author: "Not specified", genre: "Not specified" },
+            { title: "Manorōgam", author: "Not specified", genre: "Not specified" },
+            { title: "Kuttikaḷuṭe Kathakaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Nāṭan Pāṭṭukaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Ādhunika Nāṭakam", author: "Not specified", genre: "Not specified" },
+            { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
+            { title: "Lalita Gaṇitam", author: "Not specified", genre: "Not specified" },
+            { title: "Vijñānakōsham", author: "Not specified", genre: "Not specified" },
+            { title: "Charitratthinte Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Lalita Bhāsha", author: "Not specified", genre: "Not specified" },
+            { title: "Hindi Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Kuttikaḷuṭe Gānangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
+            { title: "Malayāḷam Pāṭham", author: "Not specified", genre: "Not specified" },
+            { title: "Vidyābhyāsam", author: "Not specified", genre: "Not specified" },
+            { title: "The Diary of a Young Girl", author: "Anne Frank", genre: "Biography" },
+            { title: "Kathakaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
+            { title: "Bhāshāpathanam", author: "Not specified", genre: "Not specified" },
+            { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
+            { title: "I Am Malala", author: "Malala Yousafzai", genre: "Biography" },
+            { title: "The Great Works of Tagore", author: "Rabindranath Tagore", genre: "Fiction/Poetry" },
+            { title: "Uncle Tom's Cabin", author: "Harriet Beecher Stowe", genre: "Fiction" },
+            { title: "The Invisible Man", author: "H.G. Wells", genre: "Science Fiction" },
+            { title: "Vidyālayam", author: "Not specified", genre: "Not specified" },
+            { title: "Paṭhanasāmagri", author: "Not specified", genre: "Not specified" },
+            { title: "Animal Farm", author: "George Orwell", genre: "Dystopian" },
+            { title: "Sāmūhika Śāstram", author: "Not specified", genre: "Not specified" },
+            { title: "Bhāshāparichayam", author: "Not specified", genre: "Not specified" },
+            { title: "Kuttikaḷuṭe Pustakam", author: "Not specified", genre: "Not specified" },
+            { title: "Gaṇita Paṭhanam", author: "Not specified", genre: "Not specified" },
+            { title: "Nāṭan Kathakaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Lalita Nāṭakam", author: "Not specified", genre: "Not specified" },
+            { title: "Vidyārthi Gaiḍ", author: "Not specified", genre: "Not specified" },
+            { title: "Kathāsamāhāram", author: "Not specified", genre: "Not specified" },
+            { title: "Charitra Paṭhanam", author: "Not specified", genre: "Not specified" },
+            { title: "Root 5", author: "Not specified", genre: "Not specified" },
+            { title: "Nāṭan Pāṭṭu", author: "Not specified", genre: "Not specified" },
+            { title: "Kuttikaḷuṭe Katha", author: "Not specified", genre: "Not specified" },
+            { title: "Bhāshāśāstram", author: "Not specified", genre: "Not specified" },
+            { title: "Jīvita Katha", author: "Not specified", genre: "Not specified" },
+            { title: "Vidyābhyphysics: "The Power of Habit", author: "Charles Duhigg", genre: "Self-help" },
+            { title: "Atomic Habits", author: "James Clear", genre: "Self-help" },
+            { title: "Aadujeevitham", author: "Benyamin", genre: "Fiction" },
+            { title: "Randamoozham", author: "M.T. Vasudevan Nair", genre: "Historical" },
+            { title: "The Alchemist", author: "Paulo Coelho", genre: "Adventure" },
+            { title: "Wings of Fire", author: "A.P.J. Abdul Kalam", genre: "Biography" },
+            { title: "Sapiens", author: "Yuval Noah Harari", genre: "Non-fiction" },
+            { title: "1984", author: "George Orwell", genre: "Dystopian" }
+        ];
 
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Contact form submission
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We’ll get back to you soon.');
-            contactForm.reset();
-        });
-    </script>
-</body>
-</html>
+        // Load Table
