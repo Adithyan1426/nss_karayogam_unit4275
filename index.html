@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Community Library</title>
+    <title>Community Organization</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,6 @@
         body {
             line-height: 1.6;
             color: #333;
-            background-color: #f4f4f4;
         }
 
         /* Navbar */
@@ -30,6 +29,16 @@
             width: 100%;
             top: 0;
             z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
         }
 
         .logo span {
@@ -62,77 +71,156 @@
             cursor: pointer;
         }
 
-        /* Library Section */
-        .library-section {
-            padding: 6rem 5% 4rem;
+        /* Hero */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to right, #004aad, #007bff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            padding: 0.8rem 1.5rem;
+            background: #ffd700;
+            color: #004aad;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .cta-button:hover {
+            background: #e6c200;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 5%;
             text-align: center;
         }
 
-        .library-section h2 {
+        .section h2 {
             font-size: 2.5rem;
             margin-bottom: 2rem;
             color: #004aad;
         }
 
-        .library-section input {
-            width: 60%;
-            padding: 10px;
-            margin: 20px 0;
+        /* About */
+        .about-content {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .about-item {
+            max-width: 300px;
+        }
+
+        /* Contact */
+        .contact form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 0.8rem;
             border: 1px solid #ccc;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 1rem;
         }
 
-        .library-table {
-            width: 80%;
-            margin: auto;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            overflow: hidden;
+        .contact textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
-        .library-table th, .library-table td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: center;
+        .contact button {
+            padding: 0.8rem;
+            background: #004aad;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        .library-table th {
-            background-color: #007bff;
-            color: white;
-            text-transform: uppercase;
-        }
-
-        .library-table tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .library-table tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        .index-col {
-            background-color: #333;
-            color: white;
-            font-weight: bold;
+        .contact button:hover {
+            background: #003580;
         }
 
         /* Footer */
         footer {
             background: #004aad;
             color: #fff;
-            padding: 1rem 5%;
-            text-align: center;
+            padding: 2rem 5%;
         }
 
-        footer p {
-            margin: 0;
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links a {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
             font-size: 0.9rem;
         }
 
-        /* Responsive Design */
+        /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -158,16 +246,16 @@
                 display: block;
             }
 
-            .library-section h2 {
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .library-section input {
-                width: 90%;
+            .hero p {
+                font-size: 1rem;
             }
 
-            .library-table {
-                width: 95%;
+            .section h2 {
+                font-size: 2rem;
             }
         }
     </style>
@@ -177,114 +265,109 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <span>Community Library</span>
+                <img src="logo.png" alt="Logo" />
+                <span>Community Org</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#library">Library</a></li>
+                <li><a href="#home">Home</a></li>
+                <li><a href="library.html">Library</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="hamburger">☰</div>
         </nav>
     </header>
 
-    <!-- Library Section -->
-    <section id="library" class="library-section">
-        <h2>Library Catalog</h2>
-        <input type="text" id="searchInput" onkeyup="searchBook()" placeholder="Search by Title, Author, or Genre...">
-        <table id="libraryTable" class="library-table">
-            <thead>
-                <tr>
-                    <th class="index-col">#</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Genre</th>
-                </tr>
-            </thead>
-            <tbody id="libraryTableBody"></tbody>
-        </table>
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Our Community</h1>
+            <p>Join us in building a brighter future through education and service.</p>
+            <a href="library.html" class="cta-button">Explore Library</a>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+        <h2>About Us</h2>
+        <p>We are dedicated to uplifting society through education, culture, and community service.</p>
+        <div class="about-content">
+            <div class="about-item">
+                <h3>Our Mission</h3>
+                <p>Empower through knowledge and unity.</p>
+            </div>
+            <div class="about-item">
+                <h3>Our Vision</h3>
+                <p>A thriving, inclusive society.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea placeholder="Message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Community Library. All Rights Reserved.</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@org.com</p>
+                <p>Phone: +123-456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="library.html">Library</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2025 Community Org. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Library Data
-        const library = [
-            { title: "Orru Vidyārththikkŭ", author: "Not specified", genre: "Not specified" },
-            { title: "Manassinte Bandhangaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Jñānam", author: "Not specified", genre: "Not specified" },
-            { title: "For the Love of Physics", author: "Walter Lewin", genre: "Non-fiction" },
-            { title: "Janaral Medisin", author: "Not specified", genre: "Not specified" },
-            { title: "The Grand Design", author: "Stephen Hawking", genre: "Non-fiction" },
-            { title: "Adhyāpakante Katha", author: "Not specified", genre: "Not specified" },
-            { title: "Guruvinte Grantham", author: "Not specified", genre: "Not specified" },
-            { title: "Bālapathanam", author: "Not specified", genre: "Not specified" },
-            { title: "Bhāshācharya", author: "Not specified", genre: "Not specified" },
-            { title: "Manorōgam", author: "Not specified", genre: "Not specified" },
-            { title: "Kuttikaḷuṭe Kathakaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Nāṭan Pāṭṭukaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Ādhunika Nāṭakam", author: "Not specified", genre: "Not specified" },
-            { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
-            { title: "Lalita Gaṇitam", author: "Not specified", genre: "Not specified" },
-            { title: "Vijñānakōsham", author: "Not specified", genre: "Not specified" },
-            { title: "Charitratthinte Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Lalita Bhāsha", author: "Not specified", genre: "Not specified" },
-            { title: "Hindi Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Kuttikaḷuṭe Gānangaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
-            { title: "Malayāḷam Pāṭham", author: "Not specified", genre: "Not specified" },
-            { title: "Vidyābhyāsam", author: "Not specified", genre: "Not specified" },
-            { title: "The Diary of a Young Girl", author: "Anne Frank", genre: "Biography" },
-            { title: "Kathakaḷ", author: "Not specified", genre: "Not specified" },
-            { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
-            { title: "Bhāshāpathanam", author: "Not specified", genre: "Not specified" },
-            { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-            { title: "I Am Malala", author: "Malala Yousafzai", genre: "Biography" },
-            { title: "The Great Works of Tagore", author: "Rabindranath Tagore", genre: "Fiction/Poetry" },
-            { title: "Uncle Tom's Cabin", author: "Harriet Beecher Stowe", genre: "Fiction" },
-            { title: "The Invisible Man", author: "H.G. Wells", genre: "Science Fiction" },
-            { title: "Animal Farm", author: "George Orwell", genre: "Dystopian" },
-            { title: "Aadujeevitham", author: "Benyamin", genre: "Fiction" },
-            { title: "Randamoozham", author: "M.T. Vasudevan Nair", genre: "Historical" },
-            { title: "The Alchemist", author: "Paulo Coelho", genre: "Adventure" },
-            { title: "Wings of Fire", author: "A.P.J. Abdul Kalam", genre: "Biography" },
-            { title: "Sapiens", author: "Yuval Noah Harari", genre: "Non-fiction" },
-            { title: "1984", author: "George Orwell", genre: "Dystopian" },
-            { title: "The Power of Habit", author: "Charles Duhigg", genre: "Self-help" },
-            { title: "Atomic Habits", author: "James Clear", genre: "Self-help" }
-        ];
-
-        // Load Table
-        function loadTable(books) {
-            const tableBody = document.getElementById("libraryTableBody");
-            tableBody.innerHTML = "";
-            books.forEach((book, index) => {
-                let row = `<tr><td class="index-col">${index + 1}</td><td>${book.title}</td><td>${book.author}</td><td>${book.genre}</td></tr>`;
-                tableBody.innerHTML += row;
-            });
-        }
-
-        // Search Books
-        function searchBook() {
-            const input = document.getElementById("searchInput").value.toLowerCase();
-            const filteredBooks = library.filter(book => 
-                book.title.toLowerCase().includes(input) || 
-                book.author.toLowerCase().includes(input) || 
-                book.genre.toLowerCase().includes(input)
-            );
-            loadTable(filteredBooks);
-        }
-
         // Toggle Mobile Menu
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
-
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            ancho
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Contact Form
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message!');
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
