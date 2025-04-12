@@ -6,38 +6,57 @@
   <title>NSS Karayogam</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; display: flex; }
-    nav {
-      background: #003366;
-      padding: 1em 0;
-      width: 200px;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
     }
-    nav a {
-      color: white;
-      margin: 1em 0;
-      text-decoration: none;
-      font-weight: bold;
-      display: block;
-      text-align: center;
-    }
-    main {
-      margin-left: 200px;
-      flex-grow: 1;
-    }
+
     header {
       background: #006699;
       color: white;
       padding: 2em;
       text-align: center;
     }
-    section { padding: 2em; max-width: 1200px; margin: auto; }
+
+    nav {
+      background: #003366;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1em;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1em;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5em;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      background: white;
+      height: 3px;
+      width: 25px;
+      margin: 4px 0;
+      border-radius: 2px;
+    }
+
     .button {
       background: #004080;
       color: white;
@@ -48,34 +67,11 @@
       margin-top: 1em;
       display: inline-block;
     }
-    .button:hover { background: #00264d; }
-    footer {
-      background: #003366;
-      color: white;
-      text-align: center;
-      padding: 1em;
+
+    .button:hover {
+      background: #00264d;
     }
-    .card {
-      background: #f4f4f4;
-      padding: 1em;
-      margin-bottom: 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-    .member-photos, .section-photos {
-      display: flex;
-      overflow-x: auto;
-      gap: 1em;
-      padding: 1em 0;
-    }
-    .member-photos img, .section-photos img {
-      flex: 0 0 auto;
-      width: 150px;
-      height: 150px;
-      border-radius: 0;
-      object-fit: cover;
-      border: 2px solid #ccc;
-    }
+
     .notification-box {
       background: #e0f7fa;
       color: #006064;
@@ -84,28 +80,80 @@
       margin-bottom: 2em;
       border-radius: 5px;
     }
+
+    .card {
+      background: #f4f4f4;
+      padding: 1em;
+      margin-bottom: 1em;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .member-photos, .section-photos {
+      display: flex;
+      overflow-x: auto;
+      gap: 1em;
+      padding: 1em 0;
+    }
+
+    .member-photos img, .section-photos img {
+      flex: 0 0 auto;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border: 2px solid #ccc;
+    }
+
+    section {
+      padding: 2em;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 1em;
+    }
+
     @media (max-width: 768px) {
-      nav {
-        position: relative;
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #003366;
+        position: absolute;
+        top: 60px;
+        left: 0;
         width: 100%;
-        height: auto;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
+        padding: 1em 0;
       }
-      main {
-        margin-left: 0;
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
       }
     }
   </style>
 </head>
 <body>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="library.html">Library</a>
-    <a href="community-members.html">Community Members</a>
-    <a href="mannathu-padmanabhan.html">Founder</a>
-    <a href="contact.html">Contact</a>
+    <div class="logo" style="color:white; font-weight:bold;">NSS Karayogam</div>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="library.html">Library</a>
+      <a href="community-members.html">Community Members</a>
+      <a href="mannathu-padmanabhan.html">Founder</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </nav>
 
   <main>
@@ -166,5 +214,12 @@
       <p>&copy; 2025 NSS Karayogam. All Rights Reserved.</p>
     </footer>
   </main>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
+
