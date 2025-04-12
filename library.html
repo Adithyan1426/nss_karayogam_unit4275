@@ -1,0 +1,40 @@
+import React from "react";
+
+export default function LibraryPage() {
+  const books = [
+    { title: "Aadujeevitham", author: "Benyamin" },
+    { title: "Randamoozham", author: "M.T. Vasudevan Nair" },
+    { title: "The Alchemist", author: "Paulo Coelho" },
+    { title: "Wings of Fire", author: "A.P.J. Abdul Kalam" },
+  ];
+
+  return (
+    <div className="font-sans bg-white text-gray-800 min-h-screen py-12 px-6 md:px-20">
+      <h1 className="text-4xl font-bold mb-6 text-center">Library</h1>
+      <p className="text-center text-gray-600 max-w-2xl mx-auto mb-10">
+        Explore our growing collection of books available to the community. Visit the Karayogam Library to borrow and enjoy!
+      </p>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {books.map((book, index) => (
+          <div
+            key={index}
+            className="p-6 bg-yellow-100 rounded-xl shadow hover:shadow-lg transition"
+          >
+            <h2 className="text-xl font-semibold text-yellow-800">{book.title}</h2>
+            <p className="text-gray-700 mt-1">by {book.author}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-16 text-center">
+        <h3 className="text-2xl font-bold mb-4">Library Rules</h3>
+        <ul className="text-gray-700 list-disc list-inside max-w-xl mx-auto">
+          <li>Books can be borrowed for up to 2 weeks.</li>
+          <li>Return books on time to avoid penalties.</li>
+          <li>Maintain silence inside the library premises.</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
