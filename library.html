@@ -3,18 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library</title>
+    <title>Library Catalog</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 20px;
         }
-        h2 {
+
+        body {
+            line-height: 1.6;
             color: #333;
+            background-color: #f4f4f4;
         }
-        input {
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: #004aad;
+            color: #fff;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo span {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Library Section */
+        .library-section {
+            padding: 6rem 5% 4rem;
+            text-align: center;
+        }
+
+        .library-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #004aad;
+        }
+
+        .library-section input {
             width: 60%;
             padding: 10px;
             margin: 20px 0;
@@ -22,7 +92,8 @@
             border-radius: 5px;
             font-size: 16px;
         }
-        table {
+
+        .library-table {
             width: 80%;
             margin: auto;
             border-collapse: collapse;
@@ -31,198 +102,235 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        th, td {
+
+        .library-table th, .library-table td {
             padding: 12px;
             border: 1px solid #ddd;
             text-align: center;
         }
-        th {
+
+        .library-table th {
             background-color: #007bff;
             color: white;
             text-transform: uppercase;
         }
-        tr:nth-child(even) {
+
+        .library-table tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        tr:hover {
+
+        .library-table tr:hover {
             background-color: #f1f1f1;
         }
+
         .index-col {
             background-color: #333;
             color: white;
             font-weight: bold;
         }
+
+        /* Footer */
+        footer {
+            background: #004aad;
+            color: #fff;
+            padding: 2rem 5%;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: #ffd700;
+        }
+
+        .social-links a {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: #004aad;
+                padding: 1rem 0;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .library-section h2 {
+                font-size: 2rem;
+            }
+
+            .library-section input {
+                width: 90%;
+            }
+
+            .library-table {
+                width: 95%;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" />
+                <span>Community Org</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#library">Library</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </nav>
+    </header>
 
-    <h2>Library</h2>
-    <input type="text" id="searchInput" onkeyup="searchBook()" placeholder="Search by Title, Author, or Genre...">
+    <!-- Library Section -->
+    <section id="library" class="library-section">
+        <h2>Library Catalog</h2>
+        <input type="text" id="searchInput" onkeyup="searchBook()" placeholder="Search by Title, Author, or Genre...">
+        <table id="libraryTable" class="library-table">
+            <thead>
+                <tr>
+                    <th class="index-col">#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Genre</th>
+                </tr>
+            </thead>
+            <tbody id="libraryTableBody"></tbody>
+        </table>
+    </section>
 
-    <table id="libraryTable">
-        <thead>
-            <tr>
-                <th class="index-col">#</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
-            </tr>
-        </thead>
-        <tbody id="libraryTableBody"></tbody>
-    </table>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: info@org.com</p>
+                <p>Phone: +123-456-7890</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#library">Library</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-bottom">© 2025 Community Org. All Rights Reserved.</p>
+    </footer>
 
     <script>
+        // Library Data
         const library = [
-            const books = [
-    { title: "Orru Vidyārththikkŭ", author: "Not specified", genre: "Not specified" },
-    { title: "Manassinte Bandhangaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Jñānam", author: "Not specified", genre: "Not specified" },
-    { title: "For the Love of Physics", author: "Not specified", genre: "Non-fiction" },
-    { title: "Janaral Medisin", author: "Not specified", genre: "Not specified" },
-    { title: "The Grand Design", author: "Not specified", genre: "Non-fiction" },
-    { title: "Adhyāpakante Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Guruvinte Grantham", author: "Not specified", genre: "Not specified" },
-    { title: "Bālapathanam", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshācharya", author: "Not specified", genre: "Not specified" },
-    { title: "Manorōgam", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Kathakaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Pāṭṭukaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Ādhunika Nāṭakam", author: "Not specified", genre: "Not specified" },
-    { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Gaṇitam", author: "Not specified", genre: "Not specified" },
-    { title: "Vijñānakōsham", author: "Not specified", genre: "Not specified" },
-    { title: "Charitratthinte Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Bhāsha", author: "Not specified", genre: "Not specified" },
-    { title: "Hindi Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Gānangaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
-    { title: "Malayāḷam Pāṭham", author: "Not specified", genre: "Not specified" },
-    { title: "Vidyābhyāsam", author: "Not specified", genre: "Not specified" },
-    { title: "The Diary of a Young Girl", author: "Not specified", genre: "Biography" },
-    { title: "Kathakaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāpathanam", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "I Am Malala", author: "Not specified", genre: "Biography" },
-    { title: "The Great Works of Tagore", author: "Not specified", genre: "Fiction/Poetry" },
-    { title: "Uncle Tom's Cabin", author: "Not specified", genre: "Fiction" },
-    { title: "The Invisible Man", author: "Not specified", genre: "Science Fiction" },
-    
-    { title: "Vidyālayam", author: "Not specified", genre: "Not specified" },
-    { title: "Paṭhanasāmagri", author: "Not specified", genre: "Not specified" },
-    { title: "Animal Farm", author: "George Orwell", genre: "Dystopian" },
-    { title: "Sāmūhika Śāstram", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāparichayam", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Pustakam", author: "Not specified", genre: "Not specified" },
-    { title: "Gaṇita Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Kathakaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Nāṭakam", author: "Not specified", genre: "Not specified" },
-    { title: "Vidyārthi Gaiḍ", author: "Not specified", genre: "Not specified" },
-    { title: "Kathāsamāhāram", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "Charitra Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Root 5", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Pāṭṭu", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Vijñānakōsham", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāśāstram", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Gaṇitam", author: "Not specified", genre: "Not specified" },
-    { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvita Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Vidyābhyāsa Pustakam", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Gānam", author: "Not specified", genre: "Not specified" },
-    { title: "Charitram", author: "Not specified", genre: "Not specified" },
-    { title: "Granthasamāhāram", author: "Not specified", genre: "Not specified" },
-    { title: "Vijñānam", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāparichayam", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "Sāmūhika Śāstram", author: "Not specified", genre: "Not specified" },
-    { title: "Gaṇita Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Pāṭham", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāśāstram", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Gaiḍ", author: "Not specified", genre: "Not specified" },
-    
-    { title: "Paṭhanasāmagri", author: "Not specified", genre: "Not specified" },
-    { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāparichayam", author: "Not specified", genre: "Not specified" },
-    { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "The Kite Runner", author: "Not specified", genre: "Fiction" },
-    { title: "The Blue Umbrella", author: "Not specified", genre: "Fiction" },
-    { title: "Oliver Twist", author: "Not specified", genre: "Fiction" },
-    { title: "Rich Dad Poor Dad", author: "Not specified", genre: "Self-help" },
-    { title: "Snow White", author: "Not specified", genre: "Fiction" },
-    { title: "Tales from the Lives of Indian", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Pāṭṭu", author: "Not specified", genre: "Not specified" },
-    { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
-    { title: "Charitra Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāśāstram", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Gaṇitam", author: "Not specified", genre: "Not specified" },
-    { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Pāṭham", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvita Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāparichayam", author: "Not specified", genre: "Not specified" },
-    { title: "Gaṇita Paṭhanam", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Kathakaḷ", author: "Not specified", genre: "Not specified" },
-    { title: "Charitram", author: "Not specified", genre: "Not specified" },
-    { title: "Vidyābhyāsam", author: "Not specified", genre: "Not specified" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "Sāmūhika Śāstram", author: "Not specified", genre: "Not specified" },
-    { title: "Mahabharatha for Children", author: "Not specified", genre: "Not specified" },
-    { title: "Ramayanam for Children", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Gaiḍ", author: "Not specified", genre: "Not specified" },
-    { title: "A Brief History of Time", author: "Not specified", genre: "Non-fiction" },
-    { title: "Puzzles to Puzzle You", author: "Not specified", genre: "Not specified" },
-    
-    { title: "Vidyārthi Pustakam", author: "Not specified", genre: "Not specified" },
-    { title: "IAS Guide", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Katha", author: "Not specified", genre: "Not specified" },
-    { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
-    { title: "Bhāshāparichayam", author: "Not specified", genre: "Not specified" },
-    { title: "Picture Atlas", author: "Not specified", genre: "Not specified" },
-    { title: "Dictionary", author: "Not specified", genre: "Not specified" },
-    { title: "Animal Encyclopedia", author: "Not specified", genre: "Not specified" },
-    { title: "Nature Encyclopedia", author: "Not specified", genre: "Not specified" },
-    { title: "Space Encyclopedia", author: "Not specified", genre: "Not specified" },
-    { title: "Lalita Nāṭakam", author: "Not specified", genre: "Not specified" },
-    { title: "Kuttikaḷuṭe Pāṭham", author: "Not specified", genre: "Not specified" },
-    { title: "OLY 3Q2D", author: "Not specified", genre: "Not specified" },
-    { title: "National Geographic Answer Book", author: "Not specified", genre: "Not specified" },
-    { title: "Galileo Galilei", author: "Not specified", genre: "Biography" },
-    { title: "Alexander", author: "Not specified", genre: "Biography" },
-    { title: "Mahatma Gandhi", author: "Not specified", genre: "Biography" },
-    { title: "Shakespeare", author: "Not specified", genre: "Fiction/Drama" },
-    { title: "The Wright Brothers", author: "Not specified", genre: "Biography" },
-    { title: "Leonardo da Vinci", author: "Not specified", genre: "Biography" },
-    { title: "Marco Polo", author: "Not specified", genre: "Biography" },
-    { title: "Mother Thesea", author: "Not specified", genre: "Biography" },
-    { title: "Neil Arm Strong", author: "Not specified", genre: "Biography" },
-    { title: "Columbus", author: "Not specified", genre: "Biography" },
-    { title: "5000 Awesome Facts", author: "Not specified", genre: "Not specified" },
-    { title: "GK Genius", author: "Not specified", genre: "Not specified" },
-    { title: "Tereli Roman English", author: "Not specified", genre: "Not specified" },
-    { title: "Florence Nightingale", author: "Not specified", genre: "Biography" },
-    { title: "Tell Me Why: William Shakespeare", author: "Not specified", genre: "Non-fiction" },
-    { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
-    { title: "Nāṭan Katha", author: "Not specified", genre: "Not specified" },
-
-    { title: "Aadujeevitham", author: "Benyamin", genre: "Fiction" },
-    { title: "Randamoozham", author: "M.T. Vasudevan Nair", genre: "Historical" },
-    { title: "The Alchemist", author: "Paulo Coelho", genre: "Adventure" },
-    { title: "Wings of Fire", author: "A.P.J. Abdul Kalam", genre: "Biography" },
-    { title: "Sapiens", author: "Yuval Noah Harari", genre: "Non-fiction" },
-    { title: "1984", author: "George Orwell", genre: "Dystopian" },
-    { title: "The Power of Habit", author: "Charles Duhigg", genre: "Self-help" },
-    { title: "Atomic Habits", author: "James Clear", genre: "Self-help" }
-];
+            { title: "Orru Vidyārththikkŭ", author: "Not specified", genre: "Not specified" },
+            { title: "Manassinte Bandhangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Jñānam", author: "Not specified", genre: "Not specified" },
+            { title: "For the Love of Physics", author: "Walter Lewin", genre: "Non-fiction" },
+            { title: "Janaral Medisin", author: "Not specified", genre: "Not specified" },
+            { title: "The Grand Design", author: "Stephen Hawking", genre: "Non-fiction" },
+            { title: "Adhyāpakante Katha", author: "Not specified", genre: "Not specified" },
+            { title: "Guruvinte Grantham", author: "Not specified", genre: "Not specified" },
+            { title: "Bālapathanam", author: "Not specified", genre: "Not specified" },
+            { title: "Bhāshācharya", author: "Not specified", genre: "Not specified" },
+            { title: "Manorōgam", author: "Not specified", genre: "Not specified" },
+            { title: "Kuttikaḷuṭe Kathakaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Nāṭan Pāṭṭukaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Ādhunika Nāṭakam", author: "Not specified", genre: "Not specified" },
+            { title: "Sāmūhika Paṭhanam", author: "Not specified", genre: "Not specified" },
+            { title: "Lalita Gaṇitam", author: "Not specified", genre: "Not specified" },
+            { title: "Vijñānakōsham", author: "Not specified", genre: "Not specified" },
+            { title: "Charitratthinte Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Lalita Bhāsha", author: "Not specified", genre: "Not specified" },
+            { title: "Hindi Pāṭhangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Kuttikaḷuṭe Gānangaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Grāmīṇa Jīvitam", author: "Not specified", genre: "Not specified" },
+            { title: "Malayāḷam Pāṭham", author: "Not specified", genre: "Not specified" },
+            { title: "Vidyābhyāsam", author: "Not specified", genre: "Not specified" },
+            { title: "The Diary of a Young Girl", author: "Anne Frank", genre: "Biography" },
+            { title: "Kathakaḷ", author: "Not specified", genre: "Not specified" },
+            { title: "Nāṭan Nr̥ttam", author: "Not specified", genre: "Not specified" },
+            { title: "Bhāshāpathanam", author: "Not specified", genre: "Not specified" },
+            { title: "Jīvacharitram", author: "Not specified", genre: "Not specified" },
+            { title: "I Am Malala", author: "Malala Yousafzai", genre: "Biography" },
+            { title: "The Great Works of Tagore", author: "Rabindranath Tagore", genre: "Fiction/Poetry" },
+            { title: "Uncle Tom's Cabin", author: "Harriet Beecher Stowe", genre: "Fiction" },
+            { title: "The Invisible Man", author: "H.G. Wells", genre: "Science Fiction" },
+            { title: "Animal Farm", author: "George Orwell", genre: "Dystopian" },
+            { title: "Aadujeevitham", author: "Benyamin", genre: "Fiction" },
+            { title: "Randamoozham", author: "M.T. Vasudevan Nair", genre: "Historical" },
+            { title: "The Alchemist", author: "Paulo Coelho", genre: "Adventure" },
+            { title: "Wings of Fire", author: "A.P.J. Abdul Kalam", genre: "Biography" },
+            { title: "Sapiens", author: "Yuval Noah Harari", genre: "Non-fiction" },
+            { title: "1984", author: "George Orwell", genre: "Dystopian" },
+            { title: "The Power of Habit", author: "Charles Duhigg", genre: "Self-help" },
+            { title: "Atomic Habits", author: "James Clear", genre: "Self-help" }
         ];
 
+        // Load Table
         function loadTable(books) {
             const tableBody = document.getElementById("libraryTableBody");
             tableBody.innerHTML = "";
@@ -232,16 +340,26 @@
             });
         }
 
+        // Search Books
         function searchBook() {
             const input = document.getElementById("searchInput").value.toLowerCase();
-            const filteredBooks = library.filter(book => book.title.toLowerCase().includes(input) || book.author.toLowerCase().includes(input) || book.genre.toLowerCase().includes(input));
+            const filteredBooks = library.filter(book => 
+                book.title.toLowerCase().includes(input) || 
+                book.author.toLowerCase().includes(input) || 
+                book.genre.toLowerCase().includes(input)
+            );
             loadTable(filteredBooks);
         }
 
+        // Toggle Mobile Menu
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Initialize Table
         window.onload = () => loadTable(library);
     </script>
-
 </body>
 </html>
-
-
