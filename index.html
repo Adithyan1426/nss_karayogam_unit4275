@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NSS Karayogam</title>
   <style>
-    /* Reset default styles */
     * {
       margin: 0;
       padding: 0;
@@ -16,16 +15,20 @@
       font-family: Arial, sans-serif;
       line-height: 1.6;
       margin: 0;
-      padding: 0;
     }
 
+    /* Fixed Header */
     header {
       background-color: #333;
       color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 30px;
+      padding: 10px 30px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     header .logo img {
@@ -53,28 +56,52 @@
 
     /* Hero section */
     .hero {
-      background-color: #f4f4f4;
+      margin-top: 80px; /* space for fixed header */
       text-align: center;
-      padding: 80px 20px;
+      padding: 40px 20px;
+      background-color: #f4f4f4;
     }
-    .notice {
-            width: 100%;
-            background: darkred;
-            color: white;
-            padding: 10px 0;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-            margin-top: 20px;
-        }
+
+    .hero img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
 
     .hero p {
-      font-size: 1.5rem;
-      margin-top: 20px;
+      font-size: 1.3rem;
+      margin-top: 10px;
+    }
+
+    /* Scrolling Notice */
+    .notice {
+      width: 100%;
+      background: darkred;
+      color: white;
+      padding: 10px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .notice-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 15s linear infinite;
+    }
+
+    @keyframes scroll-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
     /* Content Section */
@@ -88,9 +115,13 @@
       margin-bottom: 20px;
     }
 
-    .content p {
+    .content p, .content ul {
       font-size: 1.2rem;
       margin-bottom: 15px;
+    }
+
+    .content ul {
+      padding-left: 20px;
     }
 
     /* Footer */
@@ -99,28 +130,28 @@
       color: white;
       text-align: center;
       padding: 15px 0;
-      position: relative;
-      bottom: 0;
-      width: 100%;
     }
 
-    /* Responsive Design */
+    /* Responsive */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
       }
 
       nav ul {
         flex-direction: column;
-        margin-top: 15px;
+        width: 100%;
       }
 
       nav ul li {
-        margin-bottom: 10px;
+        margin: 10px 0;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
       }
     }
-
   </style>
 </head>
 <body>
@@ -128,28 +159,30 @@
   <!-- Header Section -->
   <header>
     <div class="logo">
-      <img src="logo.png" alt="NSS Logo"> <!-- Replace with your logo -->
+      <img src="logo.png" alt="NSS Logo" /> <!-- Replace with actual logo -->
     </div>
     <nav>
       <ul>
+        <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#events">Events</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="library.html">libray</a></li>
+        <li><a href="library.html">Library</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Hero Section -->
   <section id="home" class="hero">
+    <img src="temple.jpg" alt="Temple View" /> <!-- Replace with actual image -->
     <h1>Welcome to NSS Karayogam</h1>
     <p>Empowering communities through service and development.</p>
   </section>
-   <div class="notice">
-        <span class="notice-text"> 📣📣മാറനാട് പുലമൺകാവ് ക്ഷേത്രത്തിൽ നിന്നുള്ള അറിയിപ്പ്.......
- ക്ഷേത്ര ചുറ്റുമതിൽ പൂർത്തീകരിക്കുവാൻ ഉദാരമായി സംഭാവന നൽകണമെന്ന് അഭ്യർത്ഥിക്കുന്നു........</span>
-    </div>
 
+  <!-- Scrolling Notice -->
+  <div class="notice">
+    <span class="notice-text">📣📣 മാറനാട് പുലമൺകാവ് ക്ഷേത്രത്തിൽ നിന്നുള്ള അറിയിപ്പ്....... ക്ഷേത്ര ചുറ്റുമതിൽ പൂർത്തീകരിക്കുവാൻ ഉദാരമായി സംഭാവന നൽകണമെന്ന് അഭ്യർത്ഥിക്കുന്നു........</span>
+  </div>
 
   <!-- About Section -->
   <section id="about" class="content">
@@ -161,7 +194,6 @@
   <!-- Events Section -->
   <section id="events" class="content">
     <h2>Upcoming Events</h2>
-    <p>Join us for our upcoming events aimed at spreading awareness and driving positive change in the community.</p>
     <ul>
       <li>Blood Donation Camp - April 2025</li>
       <li>Clean-Up Drive - May 2025</li>
@@ -172,7 +204,6 @@
   <!-- Contact Section -->
   <section id="contact" class="content">
     <h2>Contact Us</h2>
-    <p>If you have any questions or want to get involved, feel free to reach out!</p>
     <p>Email: <a href="mailto:nss@example.com">nss@example.com</a></p>
     <p>Phone: +91 123 456 7890</p>
   </section>
