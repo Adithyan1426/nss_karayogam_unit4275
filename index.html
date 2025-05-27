@@ -4,89 +4,142 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NSS Karayogam</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
+      background-color: #f5f7fa;
     }
 
     header {
-      background: #006699;
+      background: url('image.jpg') no-repeat center center/cover;
+      background-color: #00695c; /* Teal fallback */
       color: white;
-      padding: 2em;
+      padding: 4em 2em;
       text-align: center;
+      position: relative;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* Overlay for readability */
+      z-index: 1;
+    }
+
+    header > div {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: auto;
     }
 
     nav {
-      background: #003366;
+      background: #004d40; /* Darker teal */
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1em;
+      padding: 1em 2em;
       position: sticky;
       top: 0;
       z-index: 999;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     .nav-links {
       display: flex;
-      gap: 1em;
+      gap: 1.5em;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
-      padding: 0.5em;
+      font-weight: 500;
+      padding: 0.5em 1em;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff6f61; /* Coral accent */
     }
 
     .menu-toggle {
       display: none;
       flex-direction: column;
       cursor: pointer;
+      gap: 5px;
     }
 
     .menu-toggle span {
       background: white;
-      height: 3px;
-      width: 25px;
-      margin: 4px 0;
+      height: 4px;
+      width: 30px;
       border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
     }
 
     .button {
-      background: #004080;
+      background: #ff6f61;
       color: white;
-      padding: 0.5em 1em;
+      padding: 0.75em 1.5em;
       border: none;
       text-decoration: none;
       border-radius: 5px;
-      margin-top: 1em;
+      font-weight: 500;
       display: inline-block;
+      transition: background 0.3s ease;
     }
 
     .button:hover {
-      background: #00264d;
+      background: #e65b50;
     }
 
     .notification-box {
-      background: #e0f7fa;
-      color: #006064;
-      padding: 1em;
-      border-left: 5px solid #006064;
-      margin-bottom: 2em;
-      border-radius: 5px;
+      background: #e0f2f1;
+      color: #004d40;
+      padding: 1.5em;
+      border-left: 5px solid #004d40;
+      margin: 2em auto;
+      border-radius: 8px;
+      max-width: 1200px;
     }
 
     .card {
-      background: #f4f4f4;
-      padding: 1em;
-      margin-bottom: 1em;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      background: white;
+      padding: 1.5em;
+      margin: 1em auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 1200px;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     }
 
     .member-photos, .section-photos {
@@ -98,10 +151,16 @@
 
     .member-photos img, .section-photos img {
       flex: 0 0 auto;
-      width: 150px;
-      height: 150px;
+      width: 160px;
+      height: 160px;
       object-fit: cover;
-      border: 2px solid #ccc;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+
+    .member-photos img:hover, .section-photos img:hover {
+      transform: scale(1.05);
     }
 
     section {
@@ -111,22 +170,24 @@
     }
 
     footer {
-      background: #003366;
+      background: #004d40;
       color: white;
       text-align: center;
-      padding: 1em;
+      padding: 1.5em;
+      font-size: 0.9em;
     }
 
     @media (max-width: 768px) {
       .nav-links {
         display: none;
         flex-direction: column;
-        background: #003366;
+        background: #004d40;
         position: absolute;
-        top: 60px;
+        top: 70px;
         left: 0;
         width: 100%;
         padding: 1em 0;
+        transition: all 0.3s ease;
       }
 
       .nav-links.show {
@@ -136,13 +197,21 @@
       .menu-toggle {
         display: flex;
       }
+
+      header {
+        padding: 2em 1em;
+      }
+
+      .card {
+        padding: 1em;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
-    <div class="logo" style="color:white; font-weight:bold;">NSS Karayogam</div>
-    <div class="menu-toggle" onclick="toggleMenu()">
+    <div class="logo" style="color:white; font-weight:700;">NSS Karayogam</div>
+    <div class="menu-toggle" onclick="toggleMenu()" onkeydown="if(event.key === 'Enter') toggleMenu()" tabindex="0" aria-label="Toggle navigation menu">
       <span></span>
       <span></span>
       <span></span>
@@ -159,23 +228,22 @@
   </nav>
 
   <main>
-    <header style="background: url('image.jfif') no-repeat center center/cover; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; color: white; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);">
-      <div style="flex: 1; min-width: 300px; padding: 1em;">
+    <header>
+      <div>
         <h1>Welcome to NSS Karayogam</h1>
         <p>Empowering communities through service and unity</p>
         <p style="font-weight: bold;">Join us in our mission to uplift and unite!</p>
       </div>
-     
     </header>
 
     <section>
       <div class="notification-box">
-        <strong>Notice:</strong>കരയോഗം പരസ്പര സഹായ നിധി -14ആം തവണ.  കുറച്ച തുക 33000.ജൂൺ മാസം അടയ്ക്കേണ്ട തുക 9400/- രൂപ.</strong> 
+        <strong>Notice:</strong> കരയോഗം പരസ്പര സഹായ നിധി -14ആം തവണ. കുറച്ച തുക 33000. ജൂൺ മാസം അടയ്ക്കേണ്ട തുക 9400/- രൂപ.
+      </div>
 
       <div class="card">
         <h2>About NSS</h2>
         <p>The Nair Service Society (NSS) was established to uplift and unify the Nair community. We aim to serve society by promoting education, culture, and service through our various initiatives.</p>
-       
         <a href="about.html" class="button">More</a>
       </div>
 
@@ -183,8 +251,8 @@
         <h2>Our Founder - Mannathu Padmanabhan</h2>
         <p>Mannathu Padmanabhan was a visionary leader and social reformer who dedicated his life to the progress of the Nair community and the betterment of society as a whole.</p>
         <div class="section-photos">
-          <img src="image2.avif" alt="Founder 1">
-          <img src="image.jfif" alt="Founder 2">
+          <img src="image2.avif" alt="Portrait of Mannathu Padmanabhan">
+          <img src="image.jpg" alt="Historical photo of Mannathu Padmanabhan">
         </div>
         <a href="manathu.html" class="button">More</a>
       </div>
@@ -192,29 +260,27 @@
       <div class="card">
         <h2>Committee Members</h2>
         <p>Meet the people who lead and manage our local Karayogam activities, ensuring community involvement and service.</p>
-        
         <a href="committie.html" class="button">More</a>
       </div>
 
       <div class="card">
         <h2>Library</h2>
         <p>Our library is a hub of knowledge offering a wide range of books, magazines, and digital resources for all age groups.</p>
-        
         <a href="library.html" class="button">More</a>
       </div>
+
       <div class="card">
         <h2>Gallery</h2>
-        
         <div class="section-photos">
-          <img src="1.jpg" alt=" 1">
-          <img src="2.jpg" alt=" 2">
+          <img src="1.jpg" alt="NSS Karayogam event photo 1">
+          <img src="2.jpg" alt="NSS Karayogam event photo 2">
         </div>
         <a href="gallery.html" class="button">More</a>
       </div>
-       <div class="card">
-        <h2>NEWS</h2>
+
+      <div class="card">
+        <h2>News</h2>
         <p>കരയോഗത്തെ കുറിച്ചുള്ള അപ്‌ഡേറ്റുകള്‍</p>
-        
         <a href="news.html" class="button">More</a>
       </div>
     </section>
@@ -226,7 +292,10 @@
 
   <script>
     function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('show');
+      const menu = document.getElementById('navLinks');
+      const toggle = document.querySelector('.menu-toggle');
+      menu.classList.toggle('show');
+      toggle.classList.toggle('active');
     }
   </script>
 </body>
